@@ -1,0 +1,14 @@
+# dsh-session-groups bundle patch
+#
+# `dsh.bundle.patch` names this file; the profile merges it and mounts this
+# package's host half (lib/index.js) as one loader row. The host half owns the
+# group registry (~/.dsh/session-groups.json), the /api/plugins/dsh-session-groups
+# routes the client half calls, and the read-only guard on Session resumption.
+#
+# `id` is the loader row id (host namespace); it is unrelated to the id the
+# client bundle passes to window.__ModuleLoader__.load(), which is the package
+# name. The per-profile side is set by an id-targeted config row in each
+# profile's own cordis.patch.yml (side: webui | desktop).
+- insert:
+    - id: session-groups
+      name: 'dsh-session-groups'

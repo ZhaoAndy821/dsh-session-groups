@@ -1,0 +1,48 @@
+{
+  "name": "dsh-session-groups",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Session groups for DeepSeek Harness: assign a Session to 'webui', 'desktop' or 'shared'; a Session opened on the non-owning side is read-only (history renders, composer/attach hidden, writes refused by the host and the client).",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "README.md"
+  ],
+  "license": "MIT",
+  "engines": {
+    "dsh": ">=0.2.0-rc.1",
+    "node": ">=20"
+  },
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "session",
+    "session-group",
+    "read-only",
+    "client-plugin"
+  ],
+  "dsh": {
+    "manifestVersion": 1,
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-workspace",
+        "@deepseek-ai/dsh-client-ui-conversation"
+      ]
+    }
+  },
+  "scripts": {
+    "test:f1": "node test/f1-client-guard.mjs",
+    "test:f2": "node test/f2-live-handle.mjs"
+  }
+}
